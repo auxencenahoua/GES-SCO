@@ -6,6 +6,11 @@ export function checkRateLimit(key: string, limit = 60, windowMs = 60_000) {
   const now = Date.now();
   const bucket = buckets.get(key);
   if (!bucket || bucket.resetsAt <= now) {
+    if (buckets.size > 10_000) {
+      for (const [storedKey, storedBucket] of buckets) {
+        if (storedBucket.resetsAt <= now) buckets.delete(storedKey);
+      }
+    }
     buckets.set(key, { count: 1, resetsAt: now + windowMs });
     return { allowed: true, remaining: limit - 1, retryAfterSeconds: 0 };
   }
