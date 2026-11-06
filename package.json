@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:integration": "vitest run --config vitest.integration.config.ts --pool=threads --maxWorkers=1 --minWorkers=1",
     "format:check": "prettier --check ."
   },
   "dependencies": {
