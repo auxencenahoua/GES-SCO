@@ -1,0 +1,42 @@
+{
+  "name": "ges-sco",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "1.1.2",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "0.468.0",
+    "next": "15.2.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "tailwind-merge": "2.6.0",
+    "zod": "3.24.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.22.0",
+    "@tailwindcss/postcss": "4.0.15",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "eslint": "9.22.0",
+    "eslint-config-next": "15.2.4",
+    "prettier": "3.5.3",
+    "tailwindcss": "4.0.15",
+    "typescript": "5.8.2",
+    "vitest": "3.0.9"
+  }
+}
