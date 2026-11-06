@@ -1,0 +1,19 @@
+name: uptime
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check health endpoint
+        if: ${{ secrets.APP_HEALTH_URL != '' }}
+        env:
+          APP_HEALTH_URL: ${{ secrets.APP_HEALTH_URL }}
+        run: curl --fail --silent --show-error --max-time 10 "$APP_HEALTH_URL"
+      - name: Explain missing monitor URL
+        if: ${{ secrets.APP_HEALTH_URL == '' }}
+        run: echo "Configure APP_HEALTH_URL to activate uptime checks."
