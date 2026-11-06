@@ -14,3 +14,7 @@ GES-SCO démarre comme un monolithe modulaire Next.js. Les frontières de domain
 - extensions : RH, bibliothèque, cantine, e-learning et inventaire.
 
 Chaque module métier devra porter un `tenant_id`. Le contexte de tenant provient exclusivement de la session vérifiée côté serveur. PostgreSQL RLS sera ajouté avec les migrations de la phase Identité & multi-tenant ; aucune route métier ne devra contourner cette règle.
+
+## Noyau scolaire
+
+La migration `0003_academic_core.sql` fournit les campus, années scolaires, responsables légaux, élèves, personnel, classes, matières et inscriptions. Les relations à plusieurs ressources vérifient aussi que les ressources liées appartiennent au même tenant : un UUID connu d’un autre établissement ne suffit pas à créer une relation inter-tenant.

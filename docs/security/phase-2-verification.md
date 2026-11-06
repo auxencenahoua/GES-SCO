@@ -8,6 +8,7 @@
 - Better Auth auto-hébergé, sessions sécurisées, mots de passe et MFA TOTP avec codes de secours et verrouillage après échecs ;
 - tests unitaires négatifs d'autorisation inter-établissements.
 - test d'intégration PostgreSQL RLS exécuté avec succès le 6 novembre 2026 dans un conteneur éphémère : refus sans tenant, lecture limitée au tenant courant et écriture inter-tenant refusée.
+- test d'intégration étendu au noyau scolaire : une matière créée dans un tenant est invisible depuis un autre tenant.
 
 ## À vérifier avec l'infrastructure
 

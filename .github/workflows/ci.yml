@@ -11,6 +11,19 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: ges_sco_test_password
+          POSTGRES_DB: ges_sco_test
+        options: >-
+          --health-cmd "pg_isready -U postgres -d ges_sco_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,4 +35,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run test:integration
+        env:
+          DATABASE_TEST_URL: postgresql://postgres:ges_sco_test_password@127.0.0.1:5432/ges_sco_test
       - run: npm run build

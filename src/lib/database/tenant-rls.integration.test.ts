@@ -37,14 +37,14 @@ async function asApplication<T>(
 integrationTest("PostgreSQL RLS tenant isolation", () => {
   beforeAll(async () => {
     database = new Pool({ connectionString: databaseUrl });
-    const migration = await readFile(
-      join(
-        process.cwd(),
-        "database",
-        "migrations",
+    const migrations = await Promise.all(
+      [
         "0001_identity_and_tenants.sql",
+        "0002_onboarding.sql",
+        "0003_academic_core.sql",
+      ].map((file) =>
+        readFile(join(process.cwd(), "database", "migrations", file), "utf8"),
       ),
-      "utf8",
     );
 
     await database.query("DROP SCHEMA IF EXISTS app CASCADE");
@@ -52,7 +52,7 @@ integrationTest("PostgreSQL RLS tenant isolation", () => {
     await database.query("DROP ROLE IF EXISTS ges_sco_test_app");
     await database.query("CREATE SCHEMA auth");
     await database.query('CREATE TABLE auth."user" (id text PRIMARY KEY)');
-    await database.query(migration);
+    for (const migration of migrations) await database.query(migration);
     await database.query("CREATE ROLE ges_sco_test_app NOINHERIT");
     await database.query("GRANT USAGE ON SCHEMA app TO ges_sco_test_app");
     await database.query(
@@ -90,5 +90,18 @@ integrationTest("PostgreSQL RLS tenant isolation", () => {
       ),
     );
     expect(result.rowCount).toBe(0);
+  });
+
+  it("keeps academic records isolated across establishments", async () => {
+    await asApplication(tenantA, (client) =>
+      client.query(
+        "INSERT INTO app.subject (tenant_id, code, name) VALUES ($1, 'MATH', 'Mathématiques')",
+        [tenantA],
+      ),
+    );
+    const rows = await asApplication(tenantB, (client) =>
+      client.query("SELECT code FROM app.subject"),
+    );
+    expect(rows.rows).toEqual([]);
   });
 });
