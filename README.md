@@ -35,6 +35,6 @@ npm test
 npm run build
 ```
 
-La CI exécute ces commandes à chaque push et pull request. Les tests RLS nécessitent en plus une base PostgreSQL réelle dédiée aux tests ; leur protocole est décrit dans [phase-2-verification.md](./docs/security/phase-2-verification.md).
+La CI exécute ces commandes à chaque push et pull request. Les tests RLS nécessitent en plus une base PostgreSQL réelle dédiée aux tests ; leur protocole est décrit dans [phase-2-verification.md](./docs/security/phase-2-verification.md). La première preuve d'isolation a été exécutée localement dans un conteneur PostgreSQL éphémère le 6 novembre 2026.
 
 Les états et contraintes de l'onboarding sont couverts par les tests du domaine. La migration associée est [0002_onboarding.sql](./database/migrations/0002_onboarding.sql).
