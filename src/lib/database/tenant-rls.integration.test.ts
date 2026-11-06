@@ -44,6 +44,7 @@ integrationTest("PostgreSQL RLS tenant isolation", () => {
         "0003_academic_core.sql",
         "0004_pedagogy.sql",
         "0005_finance_and_audit.sql",
+        "0006_supporting_modules.sql",
       ].map((file) =>
         readFile(join(process.cwd(), "database", "migrations", file), "utf8"),
       ),
