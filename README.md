@@ -6,6 +6,8 @@ Plateforme SaaS de gestion scolaire multi-établissements, conçue d'abord pour 
 
 Les phases Fondations et Identité & multi-tenant sont en cours de livraison. Les modules métier ne sont pas encore exposés : l'isolation des établissements et les contrôles d'accès doivent être validés sur PostgreSQL avant la création de données scolaires ou financières.
 
+Le parcours d'onboarding est préparé à l'adresse `/onboarding`. Ses étapes, ses transitions et son brouillon persistent côté serveur dès que la base PostgreSQL est validée ; l'activation reste délibérément bloquée jusque-là.
+
 ## Démarrage local
 
 1. Installer Node.js 22.18 ou plus récent et PostgreSQL.
@@ -34,3 +36,5 @@ npm run build
 ```
 
 La CI exécute ces commandes à chaque push et pull request. Les tests RLS nécessitent en plus une base PostgreSQL réelle dédiée aux tests ; leur protocole est décrit dans [phase-2-verification.md](./docs/security/phase-2-verification.md).
+
+Les états et contraintes de l'onboarding sont couverts par les tests du domaine. La migration associée est [0002_onboarding.sql](./database/migrations/0002_onboarding.sql).
