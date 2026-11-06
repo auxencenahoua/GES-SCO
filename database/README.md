@@ -5,3 +5,5 @@
 3. Appliquer ensuite [0001_identity_and_tenants.sql](./migrations/0001_identity_and_tenants.sql).
 
 La migration active et force RLS sur les tables multi-tenant. Elle doit être vérifiée avec un rôle applicatif non-propriétaire et sans `BYPASSRLS`. Les tests d'intégration RLS nécessitent une base PostgreSQL réelle configurée dans un environnement de test ; ils ne peuvent pas être simulés correctement sans celle-ci.
+
+Pour les exécuter localement, définir `DATABASE_TEST_URL` avec un compte de base de données dédié, puis lancer `npm run test:integration`. Le test détruit les schémas `app` et `auth` de cette base : elle ne doit contenir aucune donnée utile.

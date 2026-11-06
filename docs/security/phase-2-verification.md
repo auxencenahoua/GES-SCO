@@ -11,7 +11,7 @@
 ## À vérifier avec l'infrastructure
 
 - migration Better Auth et migration GES-SCO sur une instance PostgreSQL de test ;
-- test RLS avec deux tenants, un rôle applicatif non-propriétaire et des transactions séparées ;
+- test RLS avec deux tenants, un rôle applicatif non-propriétaire et des transactions séparées (`npm run test:integration`) ;
 - inscription, vérification email, connexion, MFA, révocation de session et récupération de compte ;
 - envoi transactionnel : la configuration échoue volontairement tant qu'un fournisseur d'email n'est pas choisi ;
 - rate limiting distribué et audit persistant, qui seront ajoutés avec l'infrastructure de queue/cache et les parcours sensibles.
