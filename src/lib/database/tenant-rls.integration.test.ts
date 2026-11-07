@@ -39,6 +39,7 @@ integrationTest("PostgreSQL RLS tenant isolation", () => {
     database = new Pool({ connectionString: databaseUrl });
     const migrations = await Promise.all(
       [
+        "0000_authentication.sql",
         "0001_identity_and_tenants.sql",
         "0002_onboarding.sql",
         "0003_academic_core.sql",
